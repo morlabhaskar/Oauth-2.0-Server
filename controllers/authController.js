@@ -140,7 +140,8 @@ const logout = async (req, res) => {
 //Send Verification OTP to the User's Email
 const sendVerifyOtp = async (req, res) => {
   try {
-    const { userId } = req.body;
+    // const { userId } = req.body;
+    const { userId } = req.user;
 
     const user = await userModel.findById(userId);
 
@@ -188,14 +189,15 @@ const sendVerifyOtp = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.json({ success: true, message: "OTP Sent Successfully" });
+    res.json({ success: true, message: "OTP Sent to Register Email" });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
 };
 
 const verifyEmail = async (req, res) => {
-  const { userId, otp } = req.body;
+    const { userId } = req.user; // Extract userId from req.user
+    const { otp } = req.body;
 
   if (!userId || !otp) {
     return res.json({ success: false, message: "Missing Details!" });
