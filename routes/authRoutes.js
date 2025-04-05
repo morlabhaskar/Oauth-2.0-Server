@@ -19,7 +19,7 @@ authRouter.post('/send-verify-otp', userAuth,sendVerifyOtp);
 authRouter.post('/verify-account', userAuth,verifyEmail);
 
 //isAuthenticated route
-authRouter.post('/is-auth', userAuth,isAuthenticated);
+authRouter.get('/is-auth', userAuth,isAuthenticated);
 
 //send reset otp
 authRouter.post('/send-reset-otp',sendResetOtp);
