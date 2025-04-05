@@ -318,10 +318,22 @@ const sendResetOtp = async (req, res) => {
 //Reset User Password
 const resetPassword = async (req, res) => {
   const { email, otp, newPassword } = req.body;
-  if (!email || !otp || !newPassword) {
+  if (!email ) {
     return res.json({
       success: false,
-      message: "Email,OTP and NewPassword is Required!",
+      message: "Email is Required!",
+    });
+  }
+  if (!otp) {
+    return res.json({
+      success: false,
+      message: "OTP is Required!",
+    });
+  }
+  if ( !newPassword) {
+    return res.json({
+      success: false,
+      message: "NewPassword is Required!",
     });
   }
   try {
