@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 connectDB();
 
 //middlewares
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173','https://oauth-client-2025.vercel.app'];
 
 app.use(express.json());
 app.use(cookieParser());
