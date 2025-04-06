@@ -4,7 +4,7 @@ const userAuth = async (req, res, next) => {
   const {token} = req.cookies;
 
   if (!token) {
-    return res.json({ success: false, message: "Unauthorized User" });
+    return res.json({ success: false, message: "Unauthorized1 User" });
   }
 
   try {
@@ -15,7 +15,7 @@ const userAuth = async (req, res, next) => {
         req.user = { userId: decoded.id }; 
     }
     else{
-        res.json({ success: false, message: "Unauthorized User" });
+        res.json({ success: false, message: "Unauthorized2 User" });
     }
     next();
   } catch (error) {
