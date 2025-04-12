@@ -22,4 +22,26 @@ const getUserData = async (req, res) => {
 
 }
 
-export { getUserData };
+//update user data
+const updateUserData = async (req, res) => {
+    try {
+        const { userId } = req.user;
+        const { name } = req.body;
+
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
+        }
+
+        await userModel.findByIdAndUpdate(userId, { name });
+        const updatedUser = await userModel.findById(userId);
+
+        res.json({ success: true, message: "User updated successfully", updatedUser });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message:error.message })
+        
+    }
+}
+
+export { getUserData,updateUserData };
