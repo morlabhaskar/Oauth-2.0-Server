@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/mongodb.js';
 import authRouter from './routes/authRoutes.js';
 import userRouter from './routes/userRoutes.js';
+// import connectCloudinary from './config/cloudinary.js';
 
 //app config
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 connectDB();
+// connectCloudinary();
 
 //middlewares
 const allowedOrigins = ['http://localhost:5173','https://oauth-client-2025.vercel.app'];
