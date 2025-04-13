@@ -1,4 +1,6 @@
 import userModel from "../models/userModel.js";
+import {v2 as cloudinary} from 'cloudinary'
+// import cloudinary from '../config/cloudinary.js';
 
 const getUserData = async (req, res) => {
 
@@ -7,9 +9,9 @@ const getUserData = async (req, res) => {
         const { userId } = req.user;
         // const { userId } = req.body;
         const user = await userModel.findById(userId);
-        if (!user) {
-            return res.json({ success: false, message: "User not found" });
-        }
+        // if (!user) {
+        //     return res.json({ success: false, message: "User not found" });
+        // }
 
         res.json({ success: true, user });
         console.log(user);
@@ -44,4 +46,21 @@ const updateUserData = async (req, res) => {
     }
 }
 
-export { getUserData,updateUserData };
+// delete user account
+const deleteUserAccount = async (req, res) => {
+    const { userId } = req.user;
+    try {
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
+        }
+        await userModel.findByIdAndDelete(userId);
+        res.json({ success: true, message: "User account deleted successfully" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message:error.message })
+        
+    }
+}
+
+export { getUserData,updateUserData,deleteUserAccount };
